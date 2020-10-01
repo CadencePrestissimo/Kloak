@@ -30,7 +30,7 @@
         android:layout_marginBottom="0dp"
         android:text="@string/_1_october_2020"
         android:textAlignment="center"
-        android:textColor="#245752"
+        android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF" />
 
 </RelativeLayout>
