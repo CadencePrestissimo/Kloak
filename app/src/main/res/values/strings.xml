@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Kloak</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="_12_00_00">12:00:00</string>
+    <string name="_1_october_2020">1/10/2020,Thursday</string>
+</resources>
