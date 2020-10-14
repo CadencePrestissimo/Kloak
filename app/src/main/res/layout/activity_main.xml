@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bachground"
+    android:background="@drawable/img6"
     tools:context=".MainActivity">
 
 
     <RelativeLayout
         android:id="@+id/app_layout"
-        android:layout_width="450dp"
-        android:layout_height="804dp"
+        android:layout_width="match_parent"
+        android:layout_height="773dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="3dp"
         android:background="#00050505"
@@ -19,58 +19,45 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-        <TextView
+        <TextClock
             android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="251dp"
+            android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="164dp"
-            android:text="@string/_12_00_00"
+            android:layout_marginEnd="74dp"
+            android:layout_marginBottom="309dp"
+            android:background="@drawable/rounded2"
+            android:backgroundTint="@color/colorAccent"
             android:textAlignment="center"
+            android:paddingTop="8dp"
+            android:format12Hour="@null"
+            android:format24Hour="@null"
+            android:fontFamily="@font/cookie"
             android:textColor="#FFFFFF"
             android:textColorHighlight="#FFFFFF"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_width="241dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="3dp"
-            android:layout_marginBottom="135dp"
+            android:layout_marginEnd="83dp"
+            android:layout_marginBottom="264dp"
+            android:fontFamily="@font/cookie"
+            android:padding="5dp"
             android:text="@string/_1_october_2020"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textColorHighlight="#FFFFFF" />
+            android:textColorHighlight="#FFFFFF"
+            android:textSize="30sp" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="675dp"
-            android:background="@android:color/background_dark"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="300dp"
-            android:layout_height="279dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="75dp"
-            android:layout_marginEnd="75dp"
-            android:layout_marginBottom="381dp"
-            android:contentDescription="@string/todo"
-            app:srcCompat="@mipmap/ic_launcher_foreground" />
 
         <ImageButton
             android:id="@+id/imageButton4"
@@ -80,11 +67,100 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="37dp"
             android:layout_marginBottom="28dp"
+            android:backgroundTint="@android:color/tab_indicator_text"
             android:background="@drawable/rounded"
+            android:contentDescription="@string/todo1"
+            app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+
+        <LinearLayout
+            android:layout_width="302dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="53dp"
+            android:layout_marginBottom="139dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="51dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/cookie"
+                android:text="@string/_11_c"
+                android:textAlignment="center"
+                android:textColor="#FAF9F9"
+                android:textSize="26sp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="73dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/todo"
+                app:srcCompat="@drawable/storm" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/cookie"
+                android:text="@string/rainy"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/firstbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#00020202"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:contentDescription="@string/todo1"
+                app:srcCompat="@drawable/ic_baseline_add_alarm_24" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:contentDescription="@string/todo1"
+                app:srcCompat="@drawable/ic_baseline_timer_24" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:contentDescription="@string/todo12"
+                app:srcCompat="@drawable/ic_baseline_assignment_turned_in_24" />
+        </LinearLayout>
+
+        <AnalogClock
+            android:id="@+id/imageView5"
+            android:layout_width="223dp"
+            android:layout_height="223dp"
+            android:background="@drawable/rounded3"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/design_default_color_primary_variant"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="95dp"
+            android:layout_marginBottom="413dp"
             app:srcCompat="@drawable/ic_baseline_add_circle_24"
-            android:contentDescription="@string/todo1" />
+            android:contentDescription="@string/todo122222" />
+
     </RelativeLayout>
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
