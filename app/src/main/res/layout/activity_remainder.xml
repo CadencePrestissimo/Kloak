@@ -3,7 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/img1"
     android:layout_height="match_parent"
     tools:context=".Remainder">
+
+    <ListView
+        android:id="@+id/List"
+        android:layout_width="386dp"
+        android:layout_height="584dp"
+        />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="53dp"
+        android:layout_height="52dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded"
+        android:contentDescription="@string/todo"
+        android:onClick="adding"
+        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+
 
 </RelativeLayout>

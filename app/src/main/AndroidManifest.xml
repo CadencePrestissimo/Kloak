@@ -15,7 +15,10 @@
         android:roundIcon="@drawable/target"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Alarm"></activity>
+        <activity android:name=".MainActivity2"></activity>
+        <activity android:name=".SetAlarmActivity" />
+        <activity android:name=".AlarmFiredActivity" />
+        <activity android:name=".MainActivityAlarm" />
         <activity android:name=".Remainder" />
         <activity android:name=".Timer" />
         <activity android:name=".Help" />

@@ -1,79 +1,99 @@
 package com.example.kloak;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
+import android.net.Uri;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+public class Alarm {
+    private int _id;
+    private String alarmTime;
+    private long alarmTimeInMillis;
+    private boolean alarmStatus;
+    private String ringtoneName;
+    private Uri ringtoneUri;
+    private String label;
+    private int flag;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+    public Alarm() {}
 
-public class Alarm extends AppCompatActivity {
-
-    static ArrayList<Expand> notes=new ArrayList<Expand>();
-    static ArrayAdapter arrayAdapter;
-
-    public void adding(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+    public Alarm(int _id,
+                 String alarmTime,
+                 long alarmTimeInMillis,
+                 boolean alarmStatus,
+                 String ringtoneName,
+                 Uri ringtoneUri,
+                 String label,
+                 int flag) {
+        this._id = _id;
+        this.alarmTime = alarmTime;
+        this.alarmTimeInMillis = alarmTimeInMillis;
+        this.alarmStatus = alarmStatus;
+        this.ringtoneName = ringtoneName;
+        this.ringtoneUri = ringtoneUri;
+        this.label = label;
+        this.flag = flag;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alarm);
+    public int get_id() {
+        return _id;
+    }
 
-        ListView listView=(ListView)findViewById(R.id.listview);
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.take_notes", Context.MODE_PRIVATE);
+    public void set_id(int _id) {
+        this._id = _id;
+    }
 
-        HashSet<Expand> set = (HashSet<Expand>) sharedPreferences.getStringSet("notes", );
+    public String getAlarmTime() {
+        return alarmTime;
+    }
 
-        if (set == null) {
-            Expand ex=new Expand();
-            notes.add(ex);
+    public void setAlarmTime(String alarmTime) {
+        this.alarmTime = alarmTime;
+    }
 
-        } else {
-            notes = new ArrayList(set);
-        }
+    public long getAlarmTimeInMillis() {
+        return alarmTimeInMillis;
+    }
 
-        arrayAdapter = new ArrayAdapter(this, R.layout.expand, notes);
+    public void setAlarmTimeInMillis(long alarmTimeInMillis) {
+        this.alarmTimeInMillis = alarmTimeInMillis;
+    }
 
-        listView.setAdapter(arrayAdapter);
+    public boolean isAlarmStatus() {
+        return alarmStatus;
+    }
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra("noteId", position);
-                startActivity(intent);
-            }
-        });
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final int itemtodelete=position;
-                new AlertDialog.Builder(Alarm.this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Remove Note").setMessage("Are you sure about removing it?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        notes.remove(itemtodelete);
-                        arrayAdapter.notifyDataSetChanged();
-                        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("com.example.take_notes", Context.MODE_PRIVATE);
-                        HashSet<String> set=new HashSet(Alarm.notes);
-                        sharedPreferences.edit().putStringSet("notes",set).apply();
-                    }
-                }).setNegativeButton("No",null).show();
-                return true;
-            }
-        });
+    public void setAlarmStatus(boolean alarmStatus) {
+        this.alarmStatus = alarmStatus;
+    }
+
+    public String getRingtoneName() {
+        return ringtoneName;
+    }
+
+    public void setRingtoneName(String ringtoneName) {
+        this.ringtoneName = ringtoneName;
+    }
+
+    public Uri getRingtoneUri() {
+        return ringtoneUri;
+    }
+
+    public void setRingtoneUri(Uri ringtoneUri) {
+        this.ringtoneUri = ringtoneUri;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
 }

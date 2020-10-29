@@ -36,7 +36,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import static java.lang.Integer.valueOf;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     AnalogClock img;
     ImageButton imageButton2;
+    ImageButton ImageButton3;
     ImageButton imageButton;
     String l1,l2;
     String final_temp="";
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         textView4 = findViewById(R.id.textView4);
         imageView = findViewById(R.id.imageView);
         imageButton2=findViewById(R.id.imageButton2);
+        ImageButton3=findViewById(R.id.imageButton3);
         imageButton=findViewById(R.id.imageButton);
         img = findViewById(R.id.imageView5);
 
@@ -118,6 +119,14 @@ public class MainActivity extends AppCompatActivity {
                alarm();
             }
         });
+        ImageButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setAlpha(0.3f);
+                v.animate().alpha(1f);
+                reminder();
+            }
+        });
 
         if (d == 0)
             textView.setFormat12Hour("hh:mm:ss a");
@@ -139,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             String CityName = "?lat=" + l1 + "&lon=" + l2 + "&appid=2f380aa3cb6aa979aefc701a23cbd642";
 
             DownloadTask task = new DownloadTask();
-            task.execute("http://api.openweathermap.org/data/2.5/weather" + CityName);
+        //    task.execute("http://api.openweathermap.org/data/2.5/weather" + CityName);
 
 
         } catch (Exception e) {
@@ -196,14 +205,18 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent2 = new Intent(MainActivity.this, Timer.class);
         startActivity(intent2);
-        finish();
     }
     public void alarm()
     {
-        Intent intent3 = new Intent(MainActivity.this, Alarm.class);
+        Intent intent3 = new Intent(MainActivity.this, MainActivityAlarm.class);
         startActivity(intent3);
-        finish();
     }
+    public void reminder()
+    {
+        Intent intent4 = new Intent(MainActivity.this, Remainder.class);
+        startActivity(intent4);
+    }
+
 
 
   //----------Menu Section Start-----------------//
