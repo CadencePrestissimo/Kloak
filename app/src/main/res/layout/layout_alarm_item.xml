@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/layout_parent"
-    android:layout_margin="2dp"
-    android:background="@android:color/darker_gray">
+    android:layout_margin="1dp"
+    android:background="@drawable/rounded"
+    android:backgroundTint="#006064">
 
     <TextView
         android:id="@+id/text_view_alarm_time"
@@ -14,18 +15,24 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="8dp"
         android:text="12:00"
+        android:fontFamily="@font/cookie"
+        android:textColor="@color/colorAccent"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material.Display2" />
 
     <Button
         android:id="@+id/button_rigntone"
-        android:layout_width="267dp"
-        android:layout_height="wrap_content"
+        android:layout_width="263dp"
+        android:layout_height="29dp"
         android:layout_below="@+id/text_view_alarm_time"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
+        android:textAllCaps="false"
+        android:fontFamily="@font/cookie"
+        android:background="@drawable/rounded"
+        android:textColor="@color/ic_launcher_background"
         android:text="Ringtone" />
 
     <TextView
@@ -36,6 +43,10 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/cookie"
+        android:textColor="#ffff"
+        android:layout_marginBottom="4dp"
         android:text="Alarm 1" />
 
     <Switch
@@ -44,18 +55,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="28dp" />
 
     <Button
         android:id="@+id/button_delete"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_below="@+id/switch_alarm"
-        android:background="@drawable/rounded2"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="11dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/rounded2"
+        android:fontFamily="@font/cookie"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@color/ic_launcher_background"
         android:text="Delete" />
 
 

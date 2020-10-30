@@ -14,6 +14,7 @@
         android:background="@drawable/rounded"
         android:backgroundTint="#00838f"
         android:gravity="center"
+        android:fontFamily="@font/cookie"
         android:text="sample"
         android:textColor="#FFFFFF"
         android:textSize="20dp" />
