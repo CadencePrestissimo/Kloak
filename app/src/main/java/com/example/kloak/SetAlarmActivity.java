@@ -112,7 +112,9 @@ public class SetAlarmActivity extends AppCompatActivity implements TimePickerDia
     // time set callback
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        if(minute>=10)
         textViewTimePicker.setText(hourOfDay + ":" + minute);
+        else textViewTimePicker.setText(hourOfDay + ":0" + minute);
 
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
