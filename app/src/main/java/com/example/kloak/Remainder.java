@@ -45,7 +45,7 @@ public class Remainder extends AppCompatActivity {
             notes = new ArrayList(set);
         }
 
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
+        arrayAdapter = new ArrayAdapter(this, R.layout.listres,R.id.list_content, notes);
 
         listView.setAdapter(arrayAdapter);
 

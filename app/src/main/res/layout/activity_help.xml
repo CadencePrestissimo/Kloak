@@ -25,7 +25,8 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#367872"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#006064"
                 android:padding="10dp"
                 android:text="@string/this_is_a_digital_clock_based_app"
                 android:textColor="#FFFFFF" />
@@ -34,7 +35,8 @@
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#3A938A"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#0097a7"
                 android:padding="10dp"
                 android:text="@string/features_how_to_use_them"
                 android:textColor="#FFFFFF"
@@ -45,7 +47,7 @@
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="526dp"
-                android:background="#F8F8F8"
+                android:background="#002F32"
                 android:contentDescription="@string/todo789"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ss" />
@@ -55,10 +57,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:background="#00FFFFFF"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#006064"
                 android:text="@string/for_any_further_help_nclick_the_button_below"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#fff"/>
 
             <Button
                 android:id="@+id/button"

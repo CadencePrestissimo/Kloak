@@ -234,7 +234,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item1:
                 Intent intent=new Intent(this, Settings.class);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.item2:
                 Intent feedbackEmail = new Intent(Intent.ACTION_SEND);
@@ -246,7 +245,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item3:
                 Intent intent1=new Intent(this, Help.class);
                 startActivity(intent1);
-                finish();
                 break;
 
         }
