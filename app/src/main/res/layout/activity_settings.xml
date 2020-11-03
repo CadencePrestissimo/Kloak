@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="358dp"
-        android:layout_height="537dp"
+        android:layout_width="354dp"
+        android:layout_height="545dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="190dp"
@@ -51,11 +51,11 @@
             android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded"
+            android:backgroundTint="#006064"
             android:fontFamily="@font/cookie"
             android:padding="6dp"
             android:text="@string/clock_text_color"
-            android:background="@drawable/rounded"
-            android:backgroundTint="#006064"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -64,20 +64,20 @@
             android:id="@+id/static_spinner"
             android:layout_width="match_parent"
             android:layout_height="35dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/rounded"
             android:backgroundTint="#0097a7"
-            android:layout_marginBottom="20dp"
             android:fontFamily="@font/cookie" />
 
         <TextView
             android:id="@+id/textView13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded"
+            android:backgroundTint="#006064"
             android:fontFamily="@font/cookie"
             android:padding="6dp"
             android:text="@string/clock_frame_color"
-            android:background="@drawable/rounded"
-            android:backgroundTint="#006064"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -96,8 +96,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded"
-            android:fontFamily="@font/cookie"
             android:backgroundTint="#006064"
+            android:fontFamily="@font/cookie"
             android:padding="6dp"
             android:text="@string/clock_background_color"
             android:textColor="#FFFFFF"
@@ -142,6 +142,18 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:text="" />
 
 
     </LinearLayout>

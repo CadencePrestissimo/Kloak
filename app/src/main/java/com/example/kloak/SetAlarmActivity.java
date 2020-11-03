@@ -153,14 +153,13 @@ public class SetAlarmActivity extends AppCompatActivity implements TimePickerDia
         pendingIntent = PendingIntent.getBroadcast(this, _id, alarmIntent, 0);
     }
 
-//    public void cancelAlarm(int flag) {
-//        alarmIntent = new Intent(this, AlarmReceiver.class);
-//        pendingIntent = PendingIntent.getBroadcast(this, flag, alarmIntent, 0);
-//
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        alarmManager.cancel(pendingIntent);
-//
-//        finish();
-//    }
+         public void cancelAlarm(int flag) {
+         alarmIntent = new Intent(this, AlarmReceiver.class);
+         pendingIntent = PendingIntent.getBroadcast(this, flag, alarmIntent, 0);
+
+         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+         alarmManager.cancel(pendingIntent);
+         finish();
+    }
 
 }

@@ -12,18 +12,34 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import static java.lang.Integer.valueOf;
+
 public class Timer extends AppCompatActivity {
     SeekBar timerSeekBar;
     TextView timerTextView;
     Button controllerButton;
+    Button pauseButton;
     ImageView imageView4;
     Boolean counterIsActive = false;
+    int time;
+    Boolean pau=false;
     CountDownTimer countDownTimer;
 
-    public void resetTimer() {
+    public void pauseTimer()
+    {
+        updateTimer(time);
+        countDownTimer.cancel();
+        controllerButton.setText("Go!");
+        timerSeekBar.setEnabled(true);
+        timerSeekBar.setProgress(time);
+        counterIsActive = false;
+    }
 
-        timerTextView.setText("0:30");
-        timerSeekBar.setProgress(30);
+    public void resetTimer()
+    {
+
+        timerTextView.setText("0:00");
+        timerSeekBar.setProgress(0);
         countDownTimer.cancel();
         controllerButton.setText("Go!");
         timerSeekBar.setEnabled(true);
@@ -48,21 +64,29 @@ public class Timer extends AppCompatActivity {
 
     }
 
+    public void setTime(int t)
+    {
+        time=t;
+    }
+
+
 
     public void controlTimer(View view) {
         view.setAlpha(0.3f);
         view.animate().alpha(1f);
-        if (counterIsActive == false) {
+
+        if (counterIsActive == false ) {
 
             counterIsActive = true;
             timerSeekBar.setEnabled(false);
-            controllerButton.setText("Stop");
+            controllerButton.setText("Pause");
 
             countDownTimer = new CountDownTimer(timerSeekBar.getProgress() * 1000 + 100, 1000) {
 
                 @Override
                 public void onTick(long millisUntilFinished) {
                     updateTimer((int) millisUntilFinished / 1000);
+                    setTime((int) millisUntilFinished/1000);
                 }
 
                 @Override
@@ -74,10 +98,12 @@ public class Timer extends AppCompatActivity {
                     resetTimer();
 
                 }
+
             }.start();
 
-        } else {
-            resetTimer();
+        }
+        else {
+            pauseTimer();
         }
     }
 
@@ -90,16 +116,22 @@ public class Timer extends AppCompatActivity {
         timerSeekBar = (SeekBar)findViewById(R.id.timerSeekBar);
         timerTextView = (TextView)findViewById(R.id.timerTextView);
         controllerButton = (Button)findViewById(R.id.controllerButton);
+        pauseButton=(Button)findViewById(R.id.pauseButton);
+
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetTimer();
+            }
+        });
 
         timerSeekBar.setMax(600);
-        timerSeekBar.setProgress(30);
+        timerSeekBar.setProgress(0);
 
         timerSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
                 updateTimer(progress);
-
             }
 
             @Override
