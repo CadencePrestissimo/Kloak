@@ -62,7 +62,6 @@ public class StopWatch extends AppCompatActivity {
             lapButton.setText("Lap");
             lapButton.setEnabled(true);
 
-            setUpNotification();
 
             timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
@@ -72,13 +71,6 @@ public class StopWatch extends AppCompatActivity {
                         public void run() {
                             currentTime += 1;
                             lapTime += 1;
-
-                            manager = (NotificationManager)
-                                    getSystemService(Context.NOTIFICATION_SERVICE);
-
-                            // update notification text
-                            builder.setContentText(TimeFormatUtil.toDisplayString(currentTime));
-                            manager.notify(mId, builder.build());
 
                             // update ui
                             textView.setText(TimeFormatUtil.toDisplayString(currentTime));
@@ -98,7 +90,6 @@ public class StopWatch extends AppCompatActivity {
 
         isButtonStartPressed = false;
         timer.cancel();
-        manager.cancel(mId);
     }
 
     public void onSWatchReset() {
@@ -151,23 +142,6 @@ public class StopWatch extends AppCompatActivity {
         }
     }
 
-    public void setUpNotification() {
-        builder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_baseline_add_alarm_24)
-                        .setContentTitle("Stopwatch running")
-                        .setContentText("00:00:00")
-                        .setPriority(NotificationCompat.PRIORITY_MAX)
-                        .setOngoing(true);
-
-
-        Intent resultIntent = new Intent(this, StopWatch.class);
-
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        builder.setContentIntent(resultPendingIntent);
-
-    }
 
 
 

@@ -10,6 +10,7 @@
         android:id="@+id/stopwatch_view"
         android:layout_width="fill_parent"
         android:layout_height="90dp"
+        android:fontFamily="@font/cookie"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/design_default_color_secondary_variant"
         android:gravity="center"
