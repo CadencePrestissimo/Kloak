@@ -3,17 +3,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 public class Settings extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
    int a,b,c,d;
+   TextView ChangeTime;
    boolean sre;
     SwitchCompat s4;
 
@@ -27,15 +31,16 @@ public class Settings extends AppCompatActivity implements AdapterView.OnItemSel
         setContentView(R.layout.activity_settings);
         final Spinner mSpinner = (Spinner) findViewById(R.id.static_spinner);
         Spinner mSpinner1 = (Spinner) findViewById(R.id.static_spinner1);
+        ChangeTime=findViewById(R.id.textView16);
         Spinner mSpinner2 = (Spinner) findViewById(R.id.static_spinner2);
         s4 = findViewById(R.id.switch4);
-        SharedPreferences shared = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         sre = shared.getBoolean("choice", false);
         s4.setChecked((boolean)sre);
 
         s4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences shared = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor Editor1 = shared.edit();
                 Editor1.putBoolean("choice", isChecked);
                 Editor1.apply();
@@ -44,7 +49,14 @@ public class Settings extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
+        ChangeTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent timechange=new Intent(getApplicationContext(),timeChange.class);
+                startActivity(timechange);
 
+            }
+        });
 
        CustomAdapter mCustomAdapter = new CustomAdapter(this, spinnerTitles, spinnerImages);
         mSpinner.setAdapter(mCustomAdapter);
@@ -53,7 +65,7 @@ public class Settings extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int i, long l) {
               a= i;
-                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor prefEditor = sharedPref.edit();
                 prefEditor.putInt("spinnerChoice",a);
                 prefEditor.apply();
@@ -69,7 +81,7 @@ public class Settings extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int i, long l) {
                 b= i;
-                SharedPreferences sharedPref1 = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences sharedPref1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor prefEditor1 = sharedPref1.edit();
                 prefEditor1.putInt("spinnerChoice1",b);
                 prefEditor1.apply();
@@ -87,7 +99,7 @@ public class Settings extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int i, long l) {
                 c= i;
-                SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences sharedPref2 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor prefEditor2 = sharedPref2.edit();
                 prefEditor2.putInt("spinnerChoice2",c);
                 prefEditor2.apply();
@@ -100,15 +112,15 @@ public class Settings extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
-        SharedPreferences sharedPref =getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         int sp1=sharedPref.getInt("spinnerChoice",0);
         mSpinner.setSelection(sp1);
 
-        SharedPreferences sharedPref1 =getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref1 =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         int sp2=sharedPref1.getInt("spinnerChoice1",0);
         mSpinner1.setSelection(sp2);
 
-        SharedPreferences sharedPref2 =getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref2 =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         int sp3=sharedPref2.getInt("spinnerChoice2",0);
         mSpinner2.setSelection(sp3);
 

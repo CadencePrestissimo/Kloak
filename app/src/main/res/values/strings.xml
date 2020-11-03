@@ -173,4 +173,6 @@
     <string name="alarm_1">Alarm 1</string>
     <string name="delete">Delete</string>
     <string name="pause">Pause</string>
+    <string name="start123">Start</string>
+    <string name="lap">Lap</string>
 </resources>

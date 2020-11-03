@@ -147,7 +147,14 @@
             android:id="@+id/textView16"
             android:layout_width="match_parent"
             android:layout_height="37dp"
-            android:text="" />
+            android:text="Manually Change Time"
+            android:background="@drawable/rounded"
+            android:backgroundTint="#006064"
+            android:fontFamily="@font/cookie"
+            android:padding="6dp"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView17"

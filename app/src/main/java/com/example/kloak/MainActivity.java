@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,12 +48,15 @@ public class MainActivity extends AppCompatActivity {
     AnalogClock img;
     ImageButton imageButton2;
     ImageButton ImageButton3;
+    ImageButton stopwatchButton;
     ImageButton imageButton;
     String l1,l2;
     String final_temp="";
     TextView textView3;
     String final_wea="";
 
+
+    SharedPreferences sharedPreferences;
 
     int[] color = {Color.rgb(0, 191, 255),
             Color.rgb(193, 4, 4),
@@ -72,10 +77,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         a = getIntent().getIntExtra("a", 7);
         b = getIntent().getIntExtra("b", 6);
         c = getIntent().getIntExtra("c", 6);
         d = getIntent().getIntExtra("d", 0);
+
+
+        SharedPreferences  sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        a=sharedPref.getInt("spinnerChoice",7);
+
+        SharedPreferences sharedPref1=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        b=sharedPref1.getInt("spinnerChoice1",6);
+
+        SharedPreferences sharedPref2=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        c=sharedPref2.getInt("spinnerChoice2",6);
+
+        SharedPreferences shared=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        d=shared.getInt("choice",0);
+
+
+
         textView3 = findViewById(R.id.textView3);
         textView = findViewById(R.id.textView);
         textView2 = findViewById(R.id.textView2);
@@ -85,6 +108,16 @@ public class MainActivity extends AppCompatActivity {
         ImageButton3=findViewById(R.id.imageButton3);
         imageButton=findViewById(R.id.imageButton);
         img = findViewById(R.id.imageView5);
+        stopwatchButton=findViewById(R.id.stopwatchButton);
+
+       stopwatchButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               v.setAlpha(0.3f);
+               v.animate().alpha(1f);
+               stopWatch();
+           }
+       });
 
         textView4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
         if (d == 1) {
             textView.setFormat24Hour("hh:mm:ss a");
         }
+
+
         textView.setBackgroundTintList(ColorStateList.valueOf(color[b]));
         img.setBackgroundTintList(ColorStateList.valueOf(color[c]));
         textView.setTextColor(ColorStateList.valueOf(color[a]));
@@ -206,6 +241,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent2 = new Intent(MainActivity.this, Timer.class);
         startActivity(intent2);
     }
+
+    public void stopWatch()
+    {
+        Intent intent5 = new Intent(MainActivity.this, StopWatch.class);
+        startActivity(intent5);
+    }
     public void alarm()
     {
         Intent intent3 = new Intent(MainActivity.this, MainActivityAlarm.class);
@@ -232,8 +273,9 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId())
         {
             case R.id.item1:
-                Intent intent=new Intent(this, Settings.class);
+                Intent intent=new Intent(getApplicationContext(), Settings.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.item2:
                 Intent feedbackEmail = new Intent(Intent.ACTION_SEND);

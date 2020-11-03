@@ -32,6 +32,16 @@
             android:contentDescription="@string/todo1"
             app:srcCompat="@drawable/ic_baseline_timer_24" />
 
+
+        <ImageButton
+            android:id="@+id/stopwatchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/todo1"
+            app:srcCompat="@drawable/ic_baseline_watch_24" />
+
         <ImageButton
             android:id="@+id/imageButton3"
             android:layout_width="wrap_content"

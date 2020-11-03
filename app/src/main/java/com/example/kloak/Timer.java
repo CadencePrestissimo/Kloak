@@ -22,7 +22,6 @@ public class Timer extends AppCompatActivity {
     ImageView imageView4;
     Boolean counterIsActive = false;
     int time;
-    Boolean pau=false;
     CountDownTimer countDownTimer;
 
     public void pauseTimer()
