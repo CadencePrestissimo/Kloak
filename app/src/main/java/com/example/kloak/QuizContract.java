@@ -2,7 +2,7 @@ package com.example.kloak;
 
 import android.provider.BaseColumns;
 
-public class QuizContract {
+public final class QuizContract {
     private QuizContract() {}
 
     public static class QuestionTable implements BaseColumns

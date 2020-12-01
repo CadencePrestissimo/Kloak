@@ -3,26 +3,23 @@ package com.example.kloak;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.text.NoCopySpan;
 import android.widget.RemoteViews;
+import android.widget.TextView;
+
 
 /**
  * Implementation of App Widget functionality.
  */
 public class NewAppWidget extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-        views.setTextViewText(R.id.textView, widgetText);
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
-    }
+      Clock cl=new Clock();
+      String buttonText =cl.clock();
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -30,10 +27,14 @@ public class NewAppWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
 
             Intent intent=new Intent(context,MainActivity.class);
+            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intent,0);
             RemoteViews views=new RemoteViews(context.getPackageName(),R.layout.new_app_widget);
             views.setOnClickPendingIntent(R.id.app_layout,pendingIntent);
+            views.setCharSequence(R.id.textView2234, "setText", buttonText);
             appWidgetManager.updateAppWidget( appWidgetId,views);
+
+
         }
     }
 
@@ -46,5 +47,12 @@ public class NewAppWidget extends AppWidgetProvider {
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        super.onReceive(context, intent);
+    }
+
 }
 

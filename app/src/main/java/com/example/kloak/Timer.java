@@ -54,7 +54,6 @@ public class Timer extends AppCompatActivity {
         String secondString = Integer.toString(seconds);
 
         if (seconds <= 9) {
-
             secondString = "0" + secondString;
 
         }
@@ -116,16 +115,17 @@ public class Timer extends AppCompatActivity {
         timerTextView = (TextView)findViewById(R.id.timerTextView);
         controllerButton = (Button)findViewById(R.id.controllerButton);
         pauseButton=(Button)findViewById(R.id.pauseButton);
-
+        timerSeekBar.setMax(600);
+        timerSeekBar.setProgress(360);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               if(timerSeekBar.getProgress()!=0)
                 resetTimer();
             }
         });
 
-        timerSeekBar.setMax(600);
-        timerSeekBar.setProgress(0);
+
 
         timerSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

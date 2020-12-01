@@ -26,7 +26,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         alarmFiredIntent.putExtra("alarmTime", alarmTime);
 
         alarmFiredIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
         context.startActivity(alarmFiredIntent);
     }
 }

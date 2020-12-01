@@ -34,7 +34,7 @@
             android:background="#3D938B"
             android:padding="10dp"
             android:fontFamily="@font/cookie"
-            android:text="@string/_0_30"
+            android:text="6:00"
             android:textAlignment="center"
             android:textColor="@color/ic_launcher_background"
             android:textSize="70sp" />

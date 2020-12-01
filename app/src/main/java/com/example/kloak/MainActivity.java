@@ -1,20 +1,17 @@
 package com.example.kloak;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,26 +19,29 @@ import android.view.View;
 import android.widget.AnalogClock;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
     TextClock textView;
+    TextView flip;
     TextView textView2;
     TextView textView4;
     ImageView imageView;
@@ -50,13 +50,14 @@ public class MainActivity extends AppCompatActivity {
     ImageButton ImageButton3;
     ImageButton stopwatchButton;
     ImageButton imageButton;
-    String l1,l2;
+    String url;
     String final_temp="";
     TextView textView3;
     String final_wea="";
-
-
-    SharedPreferences sharedPreferences;
+    TextView tmz;
+    LinearLayout frame;
+    String flipString="";
+    private GPSTracker gpsTracker;
 
     int[] color = {Color.rgb(0, 191, 255),
             Color.rgb(193, 4, 4),
@@ -69,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    int a, b, c, d;
+    int a, b, c;
+    Boolean d;
     LocationManager locationManager;
     LocationListener locationListener;
 
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         a = getIntent().getIntExtra("a", 7);
         b = getIntent().getIntExtra("b", 6);
         c = getIntent().getIntExtra("c", 6);
-        d = getIntent().getIntExtra("d", 0);
+        d = getIntent().getBooleanExtra("d", false);
 
 
         SharedPreferences  sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -95,10 +97,12 @@ public class MainActivity extends AppCompatActivity {
         c=sharedPref2.getInt("spinnerChoice2",6);
 
         SharedPreferences shared=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        d=shared.getInt("choice",0);
+        d=shared.getBoolean("choice",false);
 
 
-
+        flip=findViewById(R.id.flipView);
+        tmz=findViewById(R.id.tmz);
+        frame=findViewById(R.id.layoutframe);
         textView3 = findViewById(R.id.textView3);
         textView = findViewById(R.id.textView);
         textView2 = findViewById(R.id.textView2);
@@ -118,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                stopWatch();
            }
        });
+
 
         textView4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,9 +166,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (d == 0)
+        if (!d)
             textView.setFormat12Hour("hh:mm:ss a");
-        if (d == 1) {
+        if (d) {
             textView.setFormat24Hour("hh:mm:ss a");
         }
 
@@ -171,71 +176,47 @@ public class MainActivity extends AppCompatActivity {
         textView.setBackgroundTintList(ColorStateList.valueOf(color[b]));
         img.setBackgroundTintList(ColorStateList.valueOf(color[c]));
         textView.setTextColor(ColorStateList.valueOf(color[a]));
-        clock();
-
+        Clock cl=new Clock();
+        String s4=cl.clock();
+        textView2.setText(s4);
 
         try {
-           l1 = String.valueOf(0);
-           l2 = String.valueOf(0);
-            Log.i("a", l1);
-            Log.i("b", l2);
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+            else
+            {
+                try {
+                    gpsTracker = new GPSTracker(MainActivity.this);
+                    if (gpsTracker.canGetLocation()) {
+                        double latitude = gpsTracker.getLatitude();
+                        double longitude = gpsTracker.getLongitude();
+                        String l1=String.valueOf(latitude);
+                        String l2=String.valueOf(longitude);
+                        flipString=flipString+"Latitude: "+l1+"\nLongitude: "+l2;
+                        String cityname="?lat="+l1+"&lon="+l2+"&appid=9425d36f4674a3f6671361a8c71edcae";
+                        url="http://api.openweathermap.org/data/2.5/weather"+cityname;
+                        new doit().execute();
+                    }
+                    else {
+                        gpsTracker.showSettingsAlert();
+                    }
 
-            String CityName = "?lat=" + l1 + "&lon=" + l2 + "&appid=2f380aa3cb6aa979aefc701a23cbd642";
 
-            DownloadTask task = new DownloadTask();
-        //    task.execute("http://api.openweathermap.org/data/2.5/weather" + CityName);
-
-
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
-
         }
 
-        //get location
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        locationListener = new LocationListener() {
 
-            @Override
-            public void onLocationChanged(Location location) {
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(@NonNull String provider) {
-            }
-
-            @Override
-            public void onProviderDisabled(@NonNull String provider) {
-
-            }
-        };
-
-
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            } else
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
+        flip.setText(flipString);
     }
      //--------------End of On create----------------//
 
      //-----------------date Settings-------------------//
-
-  public void clock ()
-  {
-      final Calendar calendar = Calendar.getInstance();
-      @SuppressLint("SimpleDateFormat") String dat=new SimpleDateFormat("EEE MMM dd hh:mm:ss 'GMT'Z yyyy").format(calendar.getTime());
-      String s1=dat.substring(0,3);
-      String s2=dat.substring(4,10);
-      String s3=dat.substring(29);
-      String s4=s2+" "+s3+" , "+s1;
-      textView2.setText(s4);
-  }
     public void timer()
     {
         Intent intent2 = new Intent(MainActivity.this, Timer.class);
@@ -297,37 +278,27 @@ public class MainActivity extends AppCompatActivity {
 
 //--------------Weather report---------------------------//
 
-    public class DownloadTask extends AsyncTask<String, Void, String> {
+    public class  doit extends AsyncTask<Void, Void, Void>
+    {
 
+      String result;
+      String icon;
         @Override
-        protected String doInBackground(String... urls) {
-
-            String result = "";
-            URL url;
-            HttpURLConnection urlConnection = null;
+        protected Void doInBackground(Void... voids) {
 
             try {
-                url = new URL(urls[0]);
-                urlConnection = (HttpURLConnection) url.openConnection();
-                InputStream in = urlConnection.getInputStream();
-                InputStreamReader reader = new InputStreamReader(in);
-                int data = reader.read();
-                while (data != -1) {
-                    char current = (char) data;
-                    result += current;
-                    data = reader.read();
-                }
-                return result;
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG);
+                Document data = Jsoup.connect(url).ignoreContentType(true).get();
+                result=data.text();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            return null;
+            return  null;
         }
-        String icon;
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
 
+
+        @Override
+        protected void onPostExecute(Void avoid) {
+            super.onPostExecute(avoid);
             try {
                 String message = "";
                 JSONObject jsonObject = new JSONObject(result);
@@ -339,14 +310,19 @@ public class MainActivity extends AppCompatActivity {
                 String temp_MIN=main2.getString("temp_min");
                 String temp_MAX=main2.getString("temp_max");
                 String vis=jsonObject.getString("visibility");
+                String tm= jsonObject.getString("timezone");
                 JSONObject wind=jsonObject.getJSONObject("wind");
                 String speed=wind.getString("speed");
                 String deg=wind.getString("deg");
-                final_wea="Visibility: "+vis+"\nWind =>\nSpeed: "+speed+"\nDeg: "+deg;
-
-                final_temp="Temp: "+main1+" K\nPressure: "+pressure+" mb\nHumidity: "+humidity+"\nMin Temp: "+temp_MIN+" K\nMax Temp: "+temp_MAX+" K";
+                final_wea="Visibility: "+vis+"\n---Wind---\nSpeed: "+speed+"\nDeg: "+deg;
+                float t=Float.valueOf(main1);
+                float t1= (float) (t-272.15);
+                final_temp="Temp: "+ new DecimalFormat("##.##").format(t1)+" 'C\nPressure: "+pressure+" mb\nHumidity: "+humidity+"\nMin Temp: "+temp_MIN+" K\nMax Temp: "+temp_MAX+" K";
                 JSONArray arr = new JSONArray(weatherInfo);
-                for (int i = 0; i < arr.length(); i++) {
+                String tim2="Timezone: "+tm;
+                tmz.setText(tim2);
+                for (int i = 0; i < arr.length(); i++)
+                {
                     JSONObject jsonPart = arr.getJSONObject(i);
                     String main = "";
                     icon="";
@@ -398,20 +374,23 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG);
+                    //   Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG);
                 }
 
 
-            } catch (JSONException e) {
+            } catch (JSONException e)
+            {
 
-                Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG);
+                //   Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG);
 
             }
 
 
 
+
         }
     }
+
 
 //-------------------------------------------------------------//
     //location permission

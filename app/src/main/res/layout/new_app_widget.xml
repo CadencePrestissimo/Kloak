@@ -1,36 +1,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00050505"
-    android:padding="@dimen/widget_margin">
+    android:padding="@dimen/widget_margin"
+    tools:context=".NewAppWidget">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
+        android:id="@+id/widget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="30dp"
-        android:text="@string/_12_00_00"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:text="@string/_1_october_2020"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF" />
+        <TextClock
+            android:id="@+id/textView1234"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="35sp"
+            android:textColor="#FFFFFF"
+            android:format12Hour="hh:mm:ss a"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:fontFamily="@font/cookie"/>
+
+        <TextView
+            android:id="@+id/textView2234"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/cookie"
+            android:padding="5dp"
+            android:text="@string/_1_october_2020"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#FFFFFF"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -1,6 +1,6 @@
 package com.example.kloak;
 
-public class AlarmContract {
+public final class AlarmContract {
     private AlarmContract() {}
 
     public static class AlarmTable {

@@ -93,6 +93,7 @@ public class Settings extends AppCompatActivity implements AdapterView.OnItemSel
 
             }
          });
+
          CustomAdapter mCustomAdapter2 = new CustomAdapter(this, spinnerTitles, spinnerImages);
          mSpinner2.setAdapter(mCustomAdapter2);
          mSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -113,15 +114,15 @@ public class Settings extends AppCompatActivity implements AdapterView.OnItemSel
         });
 
         SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        int sp1=sharedPref.getInt("spinnerChoice",0);
+        int sp1=sharedPref.getInt("spinnerChoice",7);
         mSpinner.setSelection(sp1);
 
         SharedPreferences sharedPref1 =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        int sp2=sharedPref1.getInt("spinnerChoice1",0);
+        int sp2=sharedPref1.getInt("spinnerChoice1",6);
         mSpinner1.setSelection(sp2);
 
         SharedPreferences sharedPref2 =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        int sp3=sharedPref2.getInt("spinnerChoice2",0);
+        int sp3=sharedPref2.getInt("spinnerChoice2",6);
         mSpinner2.setSelection(sp3);
 
     }
@@ -132,7 +133,7 @@ public class Settings extends AppCompatActivity implements AdapterView.OnItemSel
         intent.putExtra("a",a);
         intent.putExtra("b",b);
         intent.putExtra("c",c);
-        intent.putExtra("d",d);
+        intent.putExtra("d",sre);
         startActivity(intent);
         finish();
     }

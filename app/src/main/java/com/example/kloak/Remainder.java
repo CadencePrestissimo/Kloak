@@ -33,13 +33,13 @@ public class Remainder extends AppCompatActivity {
 
         ListView listView=(ListView)findViewById(R.id.List);
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.kloak", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences1234 = getApplicationContext().getSharedPreferences("com.example.kloak", Context.MODE_PRIVATE);
 
-        HashSet<String> set = (HashSet<String>) sharedPreferences.getStringSet("notes", null);
+        HashSet<String> set = (HashSet<String>) sharedPreferences1234.getStringSet("notes", null);
 
         if (set == null) {
 
-            notes.add("Example note");
+            notes.add("Start by Editing this note");
 
         } else {
             notes = new ArrayList(set);
@@ -66,9 +66,9 @@ public class Remainder extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         notes.remove(itemtodelete);
                         arrayAdapter.notifyDataSetChanged();
-                        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("com.example.kloak", Context.MODE_PRIVATE);
+                        SharedPreferences sharedPreferences1234=getApplicationContext().getSharedPreferences("com.example.kloak", Context.MODE_PRIVATE);
                         HashSet<String> set=new HashSet(Remainder.notes);
-                        sharedPreferences.edit().putStringSet("notes",set).apply();
+                        sharedPreferences1234.edit().putStringSet("notes",set).apply();
                     }
                 }).setNegativeButton("No",null).show();
                 return true;

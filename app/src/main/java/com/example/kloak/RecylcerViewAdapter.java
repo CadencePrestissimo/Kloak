@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+
 class RecylcerViewAdapter extends RecyclerView.Adapter<RecylcerViewAdapter.ViewHolder> {
 
     private static final int RINGTONE_REQUEST_CODE = 1;
@@ -76,14 +77,16 @@ class RecylcerViewAdapter extends RecyclerView.Adapter<RecylcerViewAdapter.ViewH
             @Override
             public void onClick(View v) {
 
-                if (mContext instanceof MainActivityAlarm) {
+                if (mContext instanceof MainActivity) {
                     Log.d("delete", "delete button clicked");
                     ((MainActivityAlarm)mContext).deleteAlarm(mAlarmTimes.get(poisition), poisition);
                 }
             }
         });
 
-
+        /*TODO: get time form timepicker
+         * TODO: get ringtone
+         * TODO: do all the things from main activity*/
     }
 
     @Override

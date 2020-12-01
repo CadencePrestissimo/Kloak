@@ -43,9 +43,9 @@ public class MainActivity2 extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Remainder.notes.set(noteId,String.valueOf(s));
                Remainder.arrayAdapter.notifyDataSetChanged();
-                SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("com.example.take_notes", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences1234=getApplicationContext().getSharedPreferences("com.example.take_notes", Context.MODE_PRIVATE);
                 HashSet<String> set=new HashSet<>(Remainder.notes);
-                sharedPreferences.edit().putStringSet("notes",set).apply();
+                sharedPreferences1234.edit().putStringSet("notes",set).apply();
             }
 
             @Override
